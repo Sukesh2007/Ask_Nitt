@@ -7,7 +7,7 @@ import retrofit2.create
 object RetroInstance {
     val api1: PostRegister by lazy{
         Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:4004/")
+            .baseUrl("https://ask-nitt-doubt.onrender.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(PostRegister::class.java)
