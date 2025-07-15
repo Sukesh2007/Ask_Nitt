@@ -9,7 +9,7 @@ const app = express()
 
 
 let Rno = ""
-const PORT = 4004
+//const PORT = 4004
 
 await connectDb()
 
@@ -265,8 +265,8 @@ catch(err){
 }
 })
 
-app.listen(PORT , () =>{
-    console.log(`Server running on http://localhost:${PORT}`)
+app.listen(() =>{
+    console.log(`Server running on https://ask-nitt-doubt.onrender.com`)
 })
 
 
