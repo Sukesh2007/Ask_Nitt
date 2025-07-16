@@ -8,7 +8,7 @@ export const connectDb = async () => {
   const mongoUri = process.env.MONGO_URL;
 
   if (!mongoUri) {
-    console.error("❌ MONGO_URL is not set. Add it in Render Environment Variables.");
+    console.error("MONGO_URL is not set. Add it in Render Environment Variables.");
     process.exit(1);
   }
 
@@ -17,9 +17,9 @@ export const connectDb = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("✅ MongoDB connected successfully");
+    console.log("MongoDB connected successfully");
   } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
+    console.error("MongoDB connection error:", error);
     process.exit(1);
   }
 };
