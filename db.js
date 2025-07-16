@@ -1,9 +1,23 @@
+// src/config/db.js
 import mongoose from "mongoose";
 
-export const connectDb = async() =>{
-    const mongoUri = 'mongodb+srv://sukesh:sukesh123@cluster0.1jsi6ll.mongodb.net/asknitt'
-    await mongoose.connect(mongoUri).then( () => {
-    console.log('Database connected')
-})
-}
+export const connectDb = async () => {
+  const mongoUri = process.env.MONGO_URL;
+
+  if (!mongoUri) {
+    console.error("❌ MONGO_URL is not set. Add it in Render Environment Variables.");
+    process.exit(1);
+  }
+
+  try {
+    await mongoose.connect(mongoUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ MongoDB connected successfully");
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error);
+    process.exit(1);
+  }
+};
 
