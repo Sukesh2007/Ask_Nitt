@@ -4,9 +4,12 @@ import { connectDb } from './config/db.js'
 import { Question, User, Vote } from './models/User.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import cors from 'cors';
+
+
 
 const app = express()
-
+app.use(cors());
 
 let Rno = ""
 //const PORT = 4004
@@ -14,6 +17,7 @@ let Rno = ""
 await connectDb()
 
 app.use(express.json())
+const PORT = process.env.PORT || 4004;
 
 app.get('/' , (req,res) => {
     res.send("Hello Express!")
@@ -265,9 +269,9 @@ catch(err){
 }
 })
 
-app.listen(() =>{
-    console.log(`Server running on https://ask-nitt-doubt.onrender.com`)
-})
+app.listen(PORT, () => {
+    console.log(`✅ Server running on port ${PORT}`);
+});
 
 
 
