@@ -13,11 +13,11 @@ app.use(cors());
 
 let Rno = ""
 //const PORT = 4004
-
+const PORT = process.env.PORT || 4005;
 await connectDb()
 
 app.use(express.json())
-const PORT = process.env.PORT || 4004;
+
 
 app.get('/' , (req,res) => {
     res.send("Hello Express!")
@@ -270,7 +270,7 @@ catch(err){
 })
 
 app.listen(PORT, () => {
-    console.log(`✅ Server running on port http://localhost:${PORT}`);
+    console.log(`✅ Server running on port ${PORT}`);
 });
 
 
