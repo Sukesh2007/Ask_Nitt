@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import { connectDb } from 'db.js'
-import { Question, User, Vote } from 'User.js'
+import { connectDb } from './db.js'
+import { Question, User, Vote } from './User.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import cors from 'cors';
