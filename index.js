@@ -1,23 +1,26 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import { connectDb } from './db.js'
-import { Question, User, Vote } from './User.js'
+import { connectDb } from './config/db.js'
+import { Question, User, Vote } from './models/User.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import cors from 'cors';
+import { GoogleGenAI } from "@google/genai";
 
 
+const ai = new GoogleGenAI({});
 
 const app = express()
-app.use(cors());
+
 
 let Rno = ""
 //const PORT = 4004
-const PORT = process.env.PORT || 4005;
+const PORT = process.env.PORT||4005;
+
 await connectDb()
 
 app.use(express.json())
-
+app.use(cors());
 
 app.get('/' , (req,res) => {
     res.send("Hello Express!")
@@ -69,6 +72,19 @@ app.put("/login" , async(req,res) => {
     
     
     
+})
+app.post("/askai" , async(req,res) => {
+    const { prompt } = req.body
+    const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: [
+            {
+                role: "user",
+                content: prompt
+            }
+        ]
+    })
+    res.json({ success: true, response:response.text })
 })
 
 app.get('/dashboard' , authenticatetoken , (req,res) => {
@@ -269,10 +285,11 @@ catch(err){
 }
 })
 
+
+
 app.listen(PORT, () => {
     console.log(`✅ Server running on port ${PORT}`);
 });
-
 
 
 
