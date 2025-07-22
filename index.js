@@ -5,7 +5,7 @@ import { Question, User, Vote } from './User.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import cors from 'cors';
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from "@google/generative-ai";
 
 
 const ai = new GoogleGenAI({});
